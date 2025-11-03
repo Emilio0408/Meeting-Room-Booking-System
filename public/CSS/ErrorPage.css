@@ -1,0 +1,63 @@
+/* ====== Error Page Style ====== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", Arial, sans-serif;
+    background: linear-gradient(135deg, #1e1e2f, #2b2b40);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-container {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 50px 60px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    max-width: 500px;
+}
+
+.error-container h1 {
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 0;
+    color: #ff6b6b;
+    animation: float 2s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.error-container p {
+    font-size: 1.3rem;
+    color: #ccc;
+    margin: 15px 0 30px;
+}
+
+.error-container a {
+    text-decoration: none;
+    color: #1e1e2f;
+    background: #ff6b6b;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.error-container a:hover {
+    background: #ff8787;
+    box-shadow: 0 0 10px #ff6b6b;
+}

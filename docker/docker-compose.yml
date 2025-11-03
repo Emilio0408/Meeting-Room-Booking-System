@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: . # ✅ CAMBIATO: contesto corrente (docker/)
+      dockerfile: php-apache/Dockerfile
+    container_name: meeting-room-app
+    volumes:
+      - ..:/var/www/html # ✅ CORRETTO: mappa la root del progetto
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+      - DB_NAME=meeting_rooms
+      - DB_USER=app_user
+      - DB_PASS=app_password
+
+  mysql:
+    image: mysql:8.0
+    container_name: meeting-room-mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: meeting_rooms
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: meeting-room-phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
